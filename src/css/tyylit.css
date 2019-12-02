@@ -1,0 +1,76 @@
+body {
+    font-family: 'Arial', Courier, monospace;
+}
+
+.bg {
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+ul {
+ text-align: center;
+}
+
+li {
+  float: left;
+ 
+}
+
+a {
+  display: block;
+  padding: 8px;
+}
+
+
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #eceeef;
+    border-radius: .3rem;
+}
+
+h1 {
+  background-color: white;
+  border-width: 70px;
+  border-top: white;
+  padding-top: 3rem;
+  
+  padding-bottom: 1rem;
+	text-align: center;
+	
+}
+
+nav {
+  text-transform: uppercase;
+  font-weight: bold;
+  width:100%;
+}
+
+small {
+  padding-left: 3%;
+  }
+
+.container-fluid {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.formit {
+  padding: 75px 75px 75px 50px;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  background-color: white;
+  border-radius: 5px;
+  max-width: 1000px;
+}
+
+.indexform {
+  margin-top: 0rem;
+}
+
+select {
+  width:100%;
+}
+
