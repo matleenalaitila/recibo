@@ -1,3 +1,55 @@
+<script type="text/javascript">
+function showDiv(reseptilaatikko){
+document.getElementById(reseptilaatikko).style.display = 'block';
+}
+</script>
+<?php
+    
+    //print "Tietokanta auki</br></br>";
+
+    //asetellaan muuttujilla arvot
+    $servername = "localhost";
+    $username = "demoxUser";
+    $password = "HQWWltVOQrsAe9qd";
+    $dbname = "resepti1";
+
+  
+
+    try {
+        $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
+        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        //aloitetaan transaktio
+        $connection->beginTransaction();
+
+        // sql-komennot, hakee ingredient-taulusta ingredient-sarakkeen
+        $statement = $connection->prepare("SELECT ingredient FROM ingredient");
+        $statement->execute();
+
+        // vaihdetaan hakumoodiksi objecti
+        $statement->setFetchMode(PDO::FETCH_OBJ);
+
+        //haetaan kaikki rivit
+        $result = $statement->fetchAll();
+
+        //commit (hyväksytään transaktio)
+        $connection->commit();
+    
+    }
+    catch(PDOException $e)
+    {
+
+        // rollback eli perutaan transaktio
+        $connection->rollback();
+        echo "Tietokantavirhe: " . $e->getMessage();
+    }
+
+    // suljetaan tietokantayhteys
+    $connection = null;
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,7 +93,7 @@
     </div>
 
     <div class="s009">
-      <form>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div class="inner-form indexform">
           <div class="basic-search">
             
@@ -51,19 +103,30 @@
             <div class="row">
               <div class="input-field">
                 <div class="input-select">
-                  <select data-trigger="" name="choices-single-defaul">
+                  <select data-trigger="" name="choices-single-defaul kategoriat1">
                     <option placeholder="" value="">Ruokavalio</option>
-                    <option>Subject b</option>
-                    <option>Subject c</option>
+                    <option value="Alkuruoka">Kasvisruoka</option>
+                    <option value="Pääruoka">Liharuoka</option>
+                    <option value="Aamu-, väli- ja iltapala">Gluteeniton</option>
+                    <option value="Jälkiruoka">Maidoton</option>
+                    <option value="Salaatti">Kananmunaton</option>
+                    <option value="Keitto">Vegaaninen</option>
+                    <option value="Juoma">Sokeriton</option>
+                    <option value="Juoma">Vähähiilihydraattinen</option>
                   </select>
                 </div>
               </div>
               <div class="input-field">
                 <div class="input-select">
-                  <select data-trigger="" name="choices-single-defaul">
+                  <select data-trigger="" name="choices-single-defaul kategoriat2">
                     <option placeholder="" value="">Reseptiryhmä</option>
-                    <option>Subject b</option>
-                    <option>Subject c</option>
+                    <option value="Alkuruoka">Alkuruoka</option>
+                    <option value="Pääruoka">Pääruoka</option>
+                    <option value="Aamu-, väli- ja iltapala">Aamu-, väli- ja iltapala</option>
+                    <option value="Jälkiruoka">Jälkiruoka</option>
+                    <option value="Salaatti">Salaatti</option>
+                    <option value="Keitto">Keitto</option>
+                    <option value="Juoma">Juoma</option>
                   </select>
                 </div>
               </div>
@@ -71,8 +134,9 @@
                 <div class="input-select">
                   <select data-trigger="" name="choices-single-defaul">
                     <option placeholder="" value="">Ainesosa</option>
-                    <option>Subject b</option>
-                    <option>Subject c</option>
+                    <?php  foreach($result as $row) {
+                    print "<option ingredient=$row->ingredient>$row->ingredient</option>";
+                    }?>
                   </select>
                 </div>
               </div>
@@ -82,13 +146,26 @@
               <div class="result-count"></div>
                 <div class="group-btn">
                   <button class="btn-delete" id="delete">Tyhjennä</button>
-                  <button class="btn-search">Etsi</button>
+                  <input type="button" value="Etsi" class="btn-search" onclick="showDiv('reseptilaatikko')"></input>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </form>
+      <div id="reseptilaatikko" style="display:none" class="table-responsive formit">
+            <table class="table table-striped table-sm">
+              <thead>
+                <div>
+                  <h2>Reseptin nimi tähän</h2>
+                  <a>reseptin kuva tähän</a>
+                </div>
+              </thead>
+			      </table>
+			      <button href='recipe.php?recipe=$recipename' id="new">Avaa</button>
+      </div>
+          
+   	</div>
     </div>
     <script src="js/extention/choices.js"></script>
     <script>

@@ -73,3 +73,14 @@ small {
 select {
   width:100%;
 }
+
+#reseptilaatikko {
+  position: absolute; 
+  bottom: 0; 
+  right: 0;  
+  left: 0; 
+  margin: auto;
+  width: 50%;
+  padding: 20px;
+  padding-top: 10px;
+}
