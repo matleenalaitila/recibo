@@ -1,11 +1,19 @@
+
+
 <script type="text/javascript">
 function showDiv(reseptilaatikko){
 document.getElementById(reseptilaatikko).style.display = 'block';
 }
 </script>
 <?php
+
+$kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
+$kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
+$ainesosa = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
     
-    //print "Tietokanta auki</br></br>";
+    // Miten saan alasvetovalikkoon ainesosat vain kerran?
+    // Miten saan hakutulokset näkymään?
+    
 
     //asetellaan muuttujilla arvot
     $servername = "localhost";
@@ -24,7 +32,7 @@ document.getElementById(reseptilaatikko).style.display = 'block';
         $connection->beginTransaction();
 
         // sql-komennot, hakee ingredient-taulusta ingredient-sarakkeen
-        $statement = $connection->prepare("SELECT ingredient FROM ingredient");
+        $statement = $connection->prepare("SELECT ingredient, recipename FROM ingredient, recipe");
         $statement->execute();
 
         // vaihdetaan hakumoodiksi objecti
@@ -132,7 +140,7 @@ document.getElementById(reseptilaatikko).style.display = 'block';
               </div>
               <div class="input-field">
                 <div class="input-select">
-                  <select data-trigger="" name="choices-single-defaul">
+                  <select data-trigger="" name="choices-single-defaul ainesosa">
                     <option placeholder="" value="">Ainesosa</option>
                     <?php  foreach($result as $row) {
                     print "<option ingredient=$row->ingredient>$row->ingredient</option>";
@@ -157,7 +165,9 @@ document.getElementById(reseptilaatikko).style.display = 'block';
             <table class="table table-striped table-sm">
               <thead>
                 <div>
-                  <h2>Reseptin nimi tähän</h2>
+                <?php  foreach($result as $row) {
+                    print "<h2 recipe=$row->recipename>$row->recipename</h2>";
+                    }?>
                   <a>reseptin kuva tähän</a>
                 </div>
               </thead>
