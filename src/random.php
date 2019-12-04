@@ -97,7 +97,7 @@
 				<tbody>
                     <?php
                         $dataBase = new DataBase();
-                        $dataBase->haerdmResepti("user12","4Br2Ryh70VFxUDvp","reseptit","localhost")
+                        $dataBase->haerdmResepti("demoxUser","HQWWltVOQrsAe9qd","resepti1","localhost")
                     ?>
                     
 				</tbody>

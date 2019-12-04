@@ -18,7 +18,7 @@ include("DataBase.php");
     <link href="css/tyylit.css" rel="stylesheet">
 
   </head>
-  <body>
+  <body class="bg" style="background-image: url('css/salad.jpg');">
 <h1>
 	Recibo <small>Reseptejä joka hetkeen</small>
 </h1>
@@ -43,7 +43,7 @@ include("DataBase.php");
             </div>
 		  </nav>
 		  
-		  <form role="form">
+		  <form class="formit" role="form">
 				<div class="form-group">
 					<label for="recipename">
 						Reseptin nimi
@@ -120,9 +120,9 @@ include("DataBase.php");
 							var ingredient = row.insertCell(0);
 							var amount = row.insertCell(1);
 							var measure = row.insertCell(2);
-							ingredient.innerHTML = "tyhjä ruutu";
-							amount.innerHTML = "tyhjä ruutu";
-							measure.innerHTML = "tyhjä ruutu";
+							ingredient.innerHTML = '<input type="text" id="ingredient" name="ingredient[]" />';
+							amount.innerHTML = '<input type="number" id="amount" name="amount[]"/>';
+							measure.innerHTML = '<input type="text" id="measure" name="measure[]" />';
 							}
 						</script>
 				</div>

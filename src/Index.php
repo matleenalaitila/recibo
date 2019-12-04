@@ -4,58 +4,17 @@
 function showDiv(reseptilaatikko){
 document.getElementById(reseptilaatikko).style.display = 'block';
 }
+
 </script>
 <?php
-
+include_once("DataBase.php");
 $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
 $kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
 $ainesosa = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
     
     // Miten saan alasvetovalikkoon ainesosat vain kerran?
     // Miten saan hakutulokset näkymään?
-    
-
-    //asetellaan muuttujilla arvot
-    $servername = "localhost";
-    $username = "demoxUser";
-    $password = "HQWWltVOQrsAe9qd";
-    $dbname = "resepti1";
-
-  
-
-    try {
-        $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        // set the PDO error mode to exception
-        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-        //aloitetaan transaktio
-        $connection->beginTransaction();
-
-        // sql-komennot, hakee ingredient-taulusta ingredient-sarakkeen
-        $statement = $connection->prepare("SELECT ingredient, recipename FROM ingredient, recipe");
-        $statement->execute();
-
-        // vaihdetaan hakumoodiksi objecti
-        $statement->setFetchMode(PDO::FETCH_OBJ);
-
-        //haetaan kaikki rivit
-        $result = $statement->fetchAll();
-
-        //commit (hyväksytään transaktio)
-        $connection->commit();
-    
-    }
-    catch(PDOException $e)
-    {
-
-        // rollback eli perutaan transaktio
-        $connection->rollback();
-        echo "Tietokantavirhe: " . $e->getMessage();
-    }
-
-    // suljetaan tietokantayhteys
-    $connection = null;
-?>
+  ?>
 
 
 <!DOCTYPE html>
@@ -142,9 +101,12 @@ $ainesosa = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
                 <div class="input-select">
                   <select data-trigger="" name="choices-single-defaul ainesosa">
                     <option placeholder="" value="">Ainesosa</option>
-                    <?php  foreach($result as $row) {
-                    print "<option ingredient=$row->ingredient>$row->ingredient</option>";
-                    }?>
+                    <tbody>
+                      <?php
+                          $dataBase = new DataBase();
+                          $dataBase->searchIngredient("demoxUser","HQWWltVOQrsAe9qd","resepti1","localhost");
+                      ?>
+                      </tbody>
                   </select>
                 </div>
               </div>
@@ -165,10 +127,10 @@ $ainesosa = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
             <table class="table table-striped table-sm">
               <thead>
                 <div>
-                <?php  foreach($result as $row) {
-                    print "<h2 recipe=$row->recipename>$row->recipename</h2>";
-                    }?>
-                  <a>reseptin kuva tähän</a>
+                <?php
+                          $dataBase = new DataBase();
+                          $dataBase->searchRecipe("demoxUser","HQWWltVOQrsAe9qd","resepti1","localhost");
+                      ?>
                 </div>
               </thead>
 			      </table>
