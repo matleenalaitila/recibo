@@ -84,3 +84,8 @@ select {
   padding: 20px;
   padding-top: 10px;
 }
+
+.klikkaa {
+  font-size: x-large;
+  color: black;
+}

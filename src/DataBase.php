@@ -156,7 +156,7 @@ public function haerdmResepti($username, $password, $database, $host) {
 
             foreach($result as $row) {
                 
-                print "<h2>" . $row->recipename . "</h2>";
+                print "<a class='klikkaa' href='recipe.php?recipe=recipename'>" . $row->recipename . "</a>";
             }
 		}
 		catch(PDOException $e)
