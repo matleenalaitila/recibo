@@ -1,43 +1,5 @@
 <?php
-		//asetellaan muuttujilla arvot
-		$servername = "localhost";
-		$username = "demoxUser";
-		$password = "HQWWltVOQrsAe9qd";
-		$dbname = "resepti1";
-	
-		try {
-			$connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-			// set the PDO error mode to exception
-			$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
-			//aloitetaan transaktio
-			$connection->beginTransaction();
-	
-			// tähän sql-komennot, jossa saadaan talteen tiedot
-			$statement = $connection->prepare("SELECT * FROM diet");
-        	$statement->execute();
-
-			// vaihdetaan hakumoodiksi objecti
-			$statement->setFetchMode(PDO::FETCH_OBJ);
-	
-			//haetaan kaikki rivit
-			$result = $statement->fetchAll();
-	
-	
-			//commit (hyväksytään transaktio)
-			$connection->commit();
-		
-		}
-		catch(PDOException $e)
-		{
-	
-			// rollback eli perutaan transaktio
-			$connection->rollback();
-			echo "Tietokantavirhe: " . $e->getMessage();
-		}
-	
-		// suljetaan tietokantayhteys
-		$connection = null;
+include("DataBase.php");		
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +18,7 @@
     <link href="css/tyylit.css" rel="stylesheet">
 
   </head>
-  <body class="bg" style="background-image: url('css/salad.jpg');" >
+  <body>
 <h1>
 	Recibo <small>Reseptejä joka hetkeen</small>
 </h1>
@@ -81,7 +43,7 @@
             </div>
 		  </nav>
 		  
-		  <form class="formit table-responsive" role="form">
+		  <form role="form">
 				<div class="form-group">
 					<label for="recipename">
 						Reseptin nimi
@@ -132,7 +94,7 @@
 						<option value="Juoma">Juoma</option>
 					  </select>
 				</div>
-				<div class="form-group table-responsive">
+				<div class="form-group">
 						<label for="aines1">
 							Ainesosat
 						</label>
@@ -158,13 +120,13 @@
 							var ingredient = row.insertCell(0);
 							var amount = row.insertCell(1);
 							var measure = row.insertCell(2);
-							ingredient.innerHTML = '<input type="text" id="ingredient" name="ingredient[]" />';
-							amount.innerHTML = "<input type='number' id='amount' name='amount[]'/>";
-							measure.innerHTML = '<input type="text" id="measure" name="measure[]" />';
+							ingredient.innerHTML = "tyhjä ruutu";
+							amount.innerHTML = "tyhjä ruutu";
+							measure.innerHTML = "tyhjä ruutu";
 							}
 						</script>
 				</div>
-				<div class="form-group table-responsive">	 
+				<div class="form-group">	 
 					<label for="instruction">
 						Valmistusohje
 					</label>

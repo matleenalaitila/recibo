@@ -1,58 +1,8 @@
 <?php
+  include("DataBase.php");
   $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
   $kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
-    function haerdmResepti() {
-        
-        $username = "demo1234";
-        $password = "6-js72&2tYE##NX";
-        $database = "reseptikanta";
-        $host = "localhost";
-        
-        try {
-            $conn = new PDO("mysql:host=$host;dbname=$database;charset=utf8", $username, $password);
-            
-            $sql = "SELECT * FROM recipe WHERE diet.id = $kategoria1 AND rk_group.id = $kategoria2 ORDER BY RAND() LIMIT"
-          
-            
-            $query = $conn->query($sql);
-            $query->setFetchMode(PDO::FETCH_OBJ);
-            
-            while($row = $query->fetch()) {
-                // printtaa HTML-dokumenttiin <tr> tagin
-                print "<tr>";
-				
-				print "<td>";	
-                    print $row->recipename;
-                print "</td>";
-                
-                print "<td>";
-                    print $row->userid;
-                print "</td>";
-            
-                print "<td>" . $row->port . "</td>";
-                print "<td>" . $row->instruction . "</td>";
-                print "<td>" . $row->diet . "</td>";
-                print "<td>" . $row->recipegroup . "</td>";
-                
-                $reseptinimi = $row->recipename;
-                
-                //printtaa linkin josta ko. reseptin saa koko sivulle
-                print "<td><a href='edit.php?astunnus=$reseptinimi'>Avaa</a></td>";
-                
-                // printtaa HTML-dokumenttii </tr> lopetustagin
-                print "</tr>";
-            }
-            
-            
-        } catch(PDOException $pdoex) {
-            print "Tietokannan avaus epäonnistui " . $pdoex->getMessage();
-        }
-        
-        $conn = null;
-
-    }
-?>
-
+    ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -146,7 +96,8 @@
 				</thead>
 				<tbody>
                     <?php
-                        haerdmResepti();
+                        $dataBase = new DataBase();
+                        $dataBase->haerdmResepti("user12","4Br2Ryh70VFxUDvp","reseptit","localhost")
                     ?>
                     
 				</tbody>
