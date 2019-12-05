@@ -74,7 +74,7 @@ select {
   width:100%;
 }
 
-#reseptilaatikko {
+#reseptilaatikko, #uusimmatreseptit {
   position: absolute; 
   bottom: 0; 
   right: 0;  
@@ -89,3 +89,5 @@ select {
   font-size: x-large;
   color: black;
 }
+
+
