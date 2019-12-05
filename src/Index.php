@@ -1,18 +1,12 @@
 
 
-<script type="text/javascript">
-function showDiv(reseptilaatikko){
-document.getElementById(reseptilaatikko).style.display = 'block';
-}
 
-</script>
 <?php
 include_once("DataBase.php");
 $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
 $kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
-$ainesosa = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
-
-  ?>
+$ainesosa = filter_input(INPUT_GET, 'ainesosa', FILTER_SANITIZE_STRING);
+?>
 
 
 <!DOCTYPE html>
@@ -102,7 +96,7 @@ $ainesosa = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
                     <tbody>
                       <?php
                           $dataBase = new DataBase();
-                          $dataBase->searchIngredient("demoxUser","HQWWltVOQrsAe9qd","resepti1","localhost");
+                          $dataBase->searchIngredient("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost");
                       ?>
                       </tbody>
                   </select>
@@ -113,8 +107,16 @@ $ainesosa = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
               <div class="input-field">
               <div class="result-count"></div>
                 <div class="group-btn">
-                  <button class="btn-delete" id="delete">Tyhjennä</button>
-                  <input type="button" value="Etsi" class="btn-search" onclick="showDiv('reseptilaatikko')"></input>
+                  <button class="btn-delete" id="delete" onclick="hideDiv('reseptilaatikko')">Tyhjennä</button>
+                  <input href="index.php" type="button" value="Etsi" class="btn-search" onclick="showDiv('reseptilaatikko')"></input>
+                    <script type="text/javascript">
+                      function showDiv(reseptilaatikko){
+                      document.getElementById(reseptilaatikko).style.display = 'block';
+                      }
+                      function hideDiv(reseptilaatikko){
+                      document.getElementById(reseptilaatikko).style.display = 'none';
+                      }
+                    </script>
                 </div>
               </div>
             </div>
@@ -127,7 +129,7 @@ $ainesosa = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
                 <div>
                 <?php
                           $dataBase = new DataBase();
-                          $dataBase->searchRecipe("demoxUser","HQWWltVOQrsAe9qd","resepti1","localhost");
+                          $dataBase->searchRecipe("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost");
                       ?>
                 </div>
               </thead>

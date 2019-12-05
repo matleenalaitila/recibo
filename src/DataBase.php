@@ -2,8 +2,8 @@
     
     class DataBase {
     
-       private $username = "demoxUser";
-       private $password = "HQWWltVOQrsAe9qd";
+       private $username = "resepti1";
+       private $password = "56L9R7N6F3Otw3Ur";
        private $database = "resepti1";
        private $host = "localhost";   
 
