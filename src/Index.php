@@ -6,6 +6,8 @@ include_once("DataBase.php");
 $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
 $kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
 $ainesosa = filter_input(INPUT_GET, 'ainesosa', FILTER_SANITIZE_STRING);
+$recipename = filter_input(INPUT_GET, 'recipename', FILTER_SANITIZE_STRING);
+//miten saan hakutulokset näkymään oikein? Eli miten valinnat saa tallennettua ja niistä tiedot poimittua?
 ?>
 
 
