@@ -321,7 +321,48 @@ public function haerdmResepti($username, $password, $database, $host) {
 	
 		// suljetaan tietokantayhteys
         $connection = null;
-    }
+	}
+	
+	public function SaveRecipe($username, $password, $database, $host){
+		try {
+			$connection = new PDO("mysql:host=$host;dbname=$database", $username, $password);
+			// set the PDO error mode to exception
+			$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
+			//aloitetaan transaktio
+			$connection->beginTransaction();
+	
+			// tähän sql-komennot, jossa saadaan talteen tiedot
+			$statement = $connection->prepare("SELECT recipename FROM recipe ORDER BY timestamp");
+        	$statement->execute();
+
+			// vaihdetaan hakumoodiksi objecti
+			$statement->setFetchMode(PDO::FETCH_OBJ);
+	
+			//haetaan kaikki rivit
+			$result = $statement->fetchAll();
+	
+	
+			//commit (hyväksytään transaktio)
+            $connection->commit();
+            
+
+            foreach($result as $row) {
+                print "<a class='klikkaa' href='recipe.php?recipe=recipename'>" . $row->recipename . "</a>";
+            }
+		}
+		catch(PDOException $e)
+		{
+	
+			// rollback eli perutaan transaktio
+			$connection->rollback();
+			echo "Tietokantavirhe: " . $e->getMessage();
+		}
+	
+		// suljetaan tietokantayhteys
+        $connection = null;
+
+	}
 }
 
        
