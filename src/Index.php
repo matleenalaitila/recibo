@@ -1,18 +1,14 @@
 
 
-<script type="text/javascript">
-function showDiv(reseptilaatikko){
-document.getElementById(reseptilaatikko).style.display = 'block';
-}
 
-</script>
 <?php
 include_once("DataBase.php");
 $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
 $kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
-$ainesosa = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
-
-  ?>
+$ainesosa = filter_input(INPUT_GET, 'ainesosa', FILTER_SANITIZE_STRING);
+$recipename = filter_input(INPUT_GET, 'recipename', FILTER_SANITIZE_STRING);
+//miten saan hakutulokset näkymään oikein? Eli miten valinnat saa tallennettua ja niistä tiedot poimittua?
+?>
 
 
 <!DOCTYPE html>
@@ -70,14 +66,14 @@ $ainesosa = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
                 <div class="input-select">
                   <select data-trigger="" name="choices-single-defaul kategoriat1">
                     <option placeholder="" value="">Ruokavalio</option>
-                    <option value="Alkuruoka">Kasvisruoka</option>
-                    <option value="Pääruoka">Liharuoka</option>
-                    <option value="Aamu-, väli- ja iltapala">Gluteeniton</option>
-                    <option value="Jälkiruoka">Maidoton</option>
-                    <option value="Salaatti">Kananmunaton</option>
-                    <option value="Keitto">Vegaaninen</option>
-                    <option value="Juoma">Sokeriton</option>
-                    <option value="Juoma">Vähähiilihydraattinen</option>
+                    <option value="Kasvisruoka">Kasvisruoka</option>
+                    <option value="Liharuoka">Liharuoka</option>
+                    <option value="Gluteeniton">Gluteeniton</option>
+                    <option value="Maidoton">Maidoton</option>
+                    <option value="Kananmunaton">Kananmunaton</option>
+                    <option value="Vegaaninen">Vegaaninen</option>
+                    <option value="Sokeriton">Sokeriton</option>
+                    <option value="Vähähiilihydraattinen">Vähähiilihydraattinen</option>
                   </select>
                 </div>
               </div>
@@ -102,7 +98,7 @@ $ainesosa = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
                     <tbody>
                       <?php
                           $dataBase = new DataBase();
-                          $dataBase->searchIngredient("demoxUser","HQWWltVOQrsAe9qd","resepti1","localhost");
+                          $dataBase->searchIngredient("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost");
                       ?>
                       </tbody>
                   </select>
@@ -113,24 +109,45 @@ $ainesosa = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
               <div class="input-field">
               <div class="result-count"></div>
                 <div class="group-btn">
-                  <button class="btn-delete" id="delete">Tyhjennä</button>
-                  <input type="button" value="Etsi" class="btn-search" onclick="showDiv('reseptilaatikko')"></input>
+                  <button class="btn-delete" id="delete" onclick="hideDiv('reseptilaatikko'); showDiv('uusimmatreseptit');">Tyhjennä</button>
+                  <input href="index.php" type="button" value="Etsi" class="btn-search" onclick=" hideDiv('uusimmatreseptit'); showDiv('reseptilaatikko');"></input>
+                    <script type="text/javascript">
+                      function showDiv(reseptilaatikko){
+                      document.getElementById(reseptilaatikko).style.display = 'block';
+                      }
+                      function hideDiv(reseptilaatikko){
+                      document.getElementById(reseptilaatikko).style.display = 'none';
+                      }
+                      function hideDiv(uusimmatreseptit){
+                      document.getElementById(uusimmatreseptit).style.display = 'none';
+                      }
+                    </script>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </form>
-      <div id="reseptilaatikko" style="display:none" class="table-responsive formit">
+      <div>
             <table class="table table-striped table-sm">
-              <thead>
-                <div>
-                <?php
-                          $dataBase = new DataBase();
-                          $dataBase->searchRecipe("demoxUser","HQWWltVOQrsAe9qd","resepti1","localhost");
-                      ?>
+              
+                <div class="table-responsive formit" id="uusimmatreseptit" style="display:block">
+                  <h2>Uusimmat reseptit</h2>    
+                  </br>
+                  <?php
+                            $dataBase = new DataBase();
+                            $dataBase->searchAllRecipes("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost");
+                  ?>
                 </div>
-              </thead>
+                <div class="table-responsive formit" id="reseptilaatikko" style="display:none">
+                  <h2>Hakutulokset</h2>
+                  </br>
+                  <?php
+                            $dataBase = new DataBase();
+                            $dataBase->searchRecipe("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost");
+                  ?>
+                </div>
+              
 			      </table>
       </div>
           

@@ -517,7 +517,7 @@ legend {
 }
 
 .choices[data-type*="select-one"] .choices__button:focus {
-  box-shadow: 0px 0px 0px 2px #00BCD4;
+  box-shadow: 0px 0px 0px 2px rgb(52, 70, 43);
 }
 
 .choices[data-type*="select-one"]:after {
@@ -563,7 +563,7 @@ legend {
   margin-bottom: 0;
   margin-left: 8px;
   padding-left: 16px;
-  border-left: 1px solid #008fa1;
+  border-left: 1px solid #91B67E;
   background-image: url("../../icons/cross.svg");
   background-size: 8px;
   width: 8px;
@@ -634,8 +634,8 @@ legend {
   font-weight: 500;
   margin-right: 3.75px;
   margin-bottom: 3.75px;
-  background-color: #00BCD4;
-  border: 1px solid #00a5bb;
+  background-color: #91B67E;
+  border: 1px solid #91B67E;
   color: #FFFFFF;
   word-break: break-all;
 }
@@ -650,8 +650,8 @@ legend {
 }
 
 .choices__list--multiple .choices__item.is-highlighted {
-  background-color: #00a5bb;
-  border: 1px solid #008fa1;
+  background-color: #91B67E;
+  border: 1px solid #91B67E;
 }
 
 .is-disabled .choices__list--multiple .choices__item {
@@ -821,6 +821,7 @@ legend {
       align-items: center;
   padding: 15px;
   font-family: 'Lato', sans-serif;
+  margin-top: -10rem;
 
 }
 
@@ -880,7 +881,7 @@ legend {
   min-width: 100px;
   height: 40px;
   padding: 0 15px;
-  background: #00bbec;
+  background: #91B67E;
   white-space: nowrap;
   border-radius: 0;
   font-size: 14px;
@@ -893,7 +894,7 @@ legend {
 }
 
 .s009 form .inner-form .input-field .btn-search:hover, .s009 form .inner-form .input-field .btn-search:focus {
-  background: #00a7d3;
+  background: rgb(100, 128, 86);
 }
 
 .s009 form .inner-form .input-field .btn-delete {
@@ -919,7 +920,7 @@ legend {
 
 .s009 form .inner-form .basic-search {
   box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  border-bottom: 2px solid #00bbec;
+  border-bottom: 2px solid #91B67E;
 }
 
 .s009 form .inner-form .basic-search .input-field {
@@ -1003,7 +1004,7 @@ legend {
 }
 
 .s009 form .inner-form .advance-search .row.third .input-field .result-count span {
-  color: #00bbec;
+  color: #91B67E;
   padding-right: 5px;
 }
 
@@ -1058,7 +1059,7 @@ legend {
   -ms-flex-align: center;
       align-items: center;
   height: 100%;
-  color: #00bbec;
+  color: #91B67E;
   font-weight: bold;
 }
 
@@ -1077,7 +1078,7 @@ legend {
 
 .s009 form .inner-form .advance-search .choices__list--dropdown .choices__item--selectable.is-highlighted {
   background: transparent;
-  color: #00bbec;
+  color: #91B67E;
 }
 
 .s009 form .inner-form .advance-search .choices__list--dropdown .choices__item {

@@ -62,7 +62,6 @@ include("DataBase.php");
 					</label>
 					<input type="number" class="form-control" id="text1">
 				</div>
-				<!-- ruokavalioita pitäisi pystyä valita useita? -->
 				<div class="form-group">
 					<label for="diet">
 						Ruokavalio
@@ -112,7 +111,6 @@ include("DataBase.php");
 							</tr>
 						</table>
 						<button type="button" onclick="addRow()">Lisää rivi</button>
-						<!-- Tämä function pitäisi saada tekemään taulukkoon tyhjiä td inputeja -->
 						<script>
 							function addRow() {
 							var table = document.getElementById("container");
