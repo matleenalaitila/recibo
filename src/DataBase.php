@@ -1,5 +1,5 @@
 <?php
-    
+
     class DataBase {
     
        private $username = "resepti1";
@@ -11,20 +11,15 @@
   
 public function haerdmResepti($username, $password, $database, $host) {
         
- 
+$kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
+	$kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);	
         
         try {
         
             $conn = new PDO("mysql:host=$host;dbname=$database;charset=utf8", $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            //print "Tietokannan avaus onnistui";
-            // SELECT * FROM recipe
-            // WHERE diet.id = 4 AND rk_group.id = '4'
-            // ORDER BY RAND()
-            // LIMIT 1 -->
-            //miten saan hakemaan mikä diet.id ja rk_group.id on valittu formilta?
             $sql = "";        
-            $sql = ("SELECT * FROM recipe ORDER BY RAND() LIMIT 1");
+            $sql = ("SELECT * FROM recipe WHERE diet = '$kategoria1' AND recipegroup = '$kategoria2'  ORDER BY RAND() LIMIT 1");
             $conn->beginTransaction();
             
 			$statement = $conn->prepare($sql);
