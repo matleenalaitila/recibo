@@ -50,14 +50,14 @@
 					</label>
 					</br>
 					<select name="kategoriat1">
-						<option value="Alkuruoka">Kasvisruoka</option>
-						<option value="Pääruoka">Liharuoka</option>
-						<option value="Aamu-, väli- ja iltapala">Gluteeniton</option>
-						<option value="Jälkiruoka">Maidoton</option>
-						<option value="Salaatti">Kananmunaton</option>
-						<option value="Keitto">Vegaaninen</option>
-						<option value="Juoma">Sokeriton</option>
-						<option value="Juoma">Vähähiilihydraattinen</option>
+						<option value="Kasvisruoka">Kasvisruoka</option>
+						<option value="Liharuoka">Liharuoka</option>
+						<option value="Gluteeniton">Gluteeniton</option>
+						<option value="Maidoton">Maidoton</option>
+						<option value="Kananmunaton">Kananmunaton</option>
+						<option value="Vegaaninen">Vegaaninen</option>
+						<option value="Sokeriton">Sokeriton</option>
+						<option value="Vähähiilihydraattinen">Vähähiilihydraattinen</option>
 					  </select>
 				</div>
 				<div class="form-group">
