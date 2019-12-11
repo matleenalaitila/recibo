@@ -64,8 +64,8 @@ small {
 
 .formit {
   padding: 75px 75px 75px 50px;
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin:auto;
+  margin-top: 100px;
   background-color: white;
   border-radius: 5px;
   max-width: 1000px;
@@ -85,7 +85,7 @@ select {
   bottom: 0; 
   right: 0;  
   left: 0; 
-  margin: auto;
+  margin-top: 50%;
   margin-bottom: 2%;
   width: 50%;
   padding: 20px;
