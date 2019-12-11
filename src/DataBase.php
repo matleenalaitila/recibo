@@ -19,7 +19,7 @@ $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
             $conn = new PDO("mysql:host=$host;dbname=$database;charset=utf8", $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = "";        
-            $sql = ("SELECT * FROM recipe WHERE diet = '$kategoria1' AND recipegroup = '$kategoria2'  ORDER BY RAND() LIMIT 1");
+            $sql = "SELECT * FROM recipe WHERE diet = '$kategoria1' AND recipegroup = '$kategoria2'  ORDER BY RAND() LIMIT 1";
             $conn->beginTransaction();
             
 			$statement = $conn->prepare($sql);
@@ -29,14 +29,14 @@ $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
 			$statement->setFetchMode(PDO::FETCH_OBJ);
 	
 			//haetaan kaikki rivit
+			// $result = $statement->fetch();
 			$row = $statement->fetch();
-	
 	
 			//commit (hyväksytään transaktio)
 		    
             $conn->commit();
 
-
+            // foreach($result as $row) {
             
                 // printtaa HTML-dokumenttiin <tr> tagin
                 print "<tr>";
@@ -61,9 +61,8 @@ $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
                 
                 // printtaa HTML-dokumenttii </tr> lopetustagin
                 print "</tr>";
-             
-        
-            
+			// }
+    
         }
             catch(PDOException $e)
             {
