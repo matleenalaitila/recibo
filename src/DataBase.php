@@ -84,7 +84,8 @@ $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
         $username = "resepti1";
         $password = "56L9R7N6F3Otw3Ur";
         $dbname = "resepti1";
-	
+		$recipename = filter_input(INPUT_GET, 'recipename', FILTER_SANITIZE_STRING);
+
 		try {
 			$connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 			// set the PDO error mode to exception
@@ -109,7 +110,7 @@ $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
             
 
             foreach($result as $row) {
-                print "<a class='klikkaa' href='recipe.php?recipe=recipename'>" . $row->recipename . "</a>";
+                print "<a class='klikkaa' href='recipe.php?recipe=$recipename'>" . $row->recipename . "</a>";
             }
 		}
 		catch(PDOException $e)
@@ -174,8 +175,10 @@ $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
         $servername = "localhost";
         $username = "resepti1";
         $password = "56L9R7N6F3Otw3Ur";
-        $dbname = "resepti1";
+		$dbname = "resepti1";
+		$kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
 		$recipename = filter_input(INPUT_GET, 'recipename', FILTER_SANITIZE_STRING);
+		
 
 		try {
 			$connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -186,7 +189,7 @@ $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
 			$connection->beginTransaction();
 	
 			// tähän sql-komennot, jossa saadaan talteen tiedot
-			$statement = $connection->prepare("SELECT recipename FROM recipe WHERE recipename='$recipename'");
+			$statement = $connection->prepare("SELECT * FROM recipe WHERE diet='$kategoria1'");
         	$statement->execute();
 
 			// vaihdetaan hakumoodiksi objecti
@@ -201,11 +204,12 @@ $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
             
 
             foreach($result as $row) {
-				$reseptinimi = "";
-                $reseptinimi = $row->recipename;
+				
+				$row->recipename;
                 
-                print "<a class='klikkaa' href='recipe.php?recipe=$reseptinimi'>" . $row->recipename . "</a>";
-            }
+                print "<a class='klikkaa' href='recipe.php?recipe=$recipename'>" . $row->recipename . "</a>";
+			}
+			
 		}
 		catch(PDOException $e)
 		{
