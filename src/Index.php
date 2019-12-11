@@ -1,6 +1,3 @@
-
-
-
 <?php
 include_once("DataBase.php");
 $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
@@ -23,7 +20,6 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/tyylit.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
     
    </head>
   <body class="bg" style="background-image: url('css/salad.jpg');">
@@ -129,7 +125,7 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
         </div>
       </form>
       <div>
-            <table name="ID" class="table table-striped table-sm">
+            <table name="ID" class="table table-striped table-sm formit">
               
                 <div name="ID" class="table-responsive formit" id="uusimmatreseptit" style="display:block">
                   <h2>Uusimmat reseptit</h2>    
@@ -144,7 +140,7 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
                   </br>
                   <?php
                             $dataBase = new DataBase();
-                            $dataBase->searchRecipe("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost");
+                            $dataBase->searchRecipe("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost",$kategoria1);
                   ?>
                 </div>
               

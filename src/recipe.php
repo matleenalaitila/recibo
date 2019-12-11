@@ -1,9 +1,9 @@
 <?php
 include_once("DataBase.php");
-$kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
-$kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
-$ainesosa = filter_input(INPUT_GET, 'ainesosa', FILTER_SANITIZE_STRING);
-$recipename = filter_input(INPUT_GET, 'recipename', FILTER_SANITIZE_STRING);
+//$kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
+//$kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
+//$ainesosa = filter_input(INPUT_GET, 'ainesosa', FILTER_SANITIZE_STRING);
+//$recipename = filter_input(INPUT_GET, 'recipename', FILTER_SANITIZE_STRING);
 $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
 //miten saan oikean reseptin tiedot näkymään tällä sivulla?
 ?>
@@ -57,8 +57,7 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
             <div class="table-responsive formit" id="reseptiohje" style="display:block">
                     <?php
                             $dataBase = new DataBase();
-                            $dataBase->searchRecipe("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost");
-                            $dataBase->getRecipeInstruction("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost");
+                            $dataBase->searchRecipeById("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost",$reseptiId);
                     ?>
                 <a href="index.php">Etusivulle</a>
             </div>
