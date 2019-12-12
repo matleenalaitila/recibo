@@ -28,5 +28,9 @@ $language = array(
     "uusimmat" =>"Uusimmat reseptit",
     "etsi" =>"Etsi",
     "language-en" => "Englanti",
-    "language-fi" => "Suomi"
+    "language-fi" => "Suomi",
+    "reseptinimi" => "Reseptinimi",
+    "käyttäjä" => "Käyttäjä",
+    "annoksia" => "Annoksia",
+    "ohje" => "Ohje"
 );

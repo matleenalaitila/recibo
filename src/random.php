@@ -1,7 +1,10 @@
 <?php
   include("DataBase.php");
+  include_once("Language.php");
   $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
   $kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
+  $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
+
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,12 +18,14 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/tyylit.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <title><?php echo $language['title']?></title>
 
   </head>
   <body class="bg" style="background-image: url('css/salad.jpg');">
-    <h1>
-        Recibo  <small>Reseptejä joka hetkeen</small>
-    </h1>
+  <h1>
+  <div><a class="kielet" href="random.php?language=fi"><?php echo $language['language-fi']?></a><a class="kielet" href="random.php?language=en"><?php echo $language['language-en']?></a></div>
+    Recibo <small><?php echo $language['title']?></small>
+  </h1>
     <div class="container-fluid">
       <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -45,38 +50,36 @@
           <form class="formit" role="form" action="random.php" method="get">
       <div>
 				<div class="form-group">
-					<label for="diet">
-						Ruokavalio
-					</label>
+					<label for="diet"><?php echo $language['ruokavalio']?></label>
 					</br>
 					<select name="kategoriat1">
-						<option value="Kasvisruoka">Kasvisruoka</option>
-						<option value="Liharuoka">Liharuoka</option>
-						<option value="Gluteeniton">Gluteeniton</option>
-						<option value="Maidoton">Maidoton</option>
-						<option value="Kananmunaton">Kananmunaton</option>
-						<option value="Vegaaninen">Vegaaninen</option>
-						<option value="Sokeriton">Sokeriton</option>
-						<option value="Vähähiilihydraattinen">Vähähiilihydraattinen</option>
+          <option value="Kasvisruoka"><?php echo $language['kasvisruoka']?></option>
+                    <option value="Liharuoka"><?php echo $language['liharuoka']?></option>
+                    <option value="Gluteeniton"><?php echo $language['gluteeniton']?></option>
+                    <option value="Maidoton"><?php echo $language['maidoton']?></option>
+                    <option value="Kananmunaton"><?php echo $language['kananmunaton']?></option>
+                    <option value="Vegaaninen"><?php echo $language['vegaaninen']?></option>
+                    <option value="Sokeriton"><?php echo $language['sokeriton']?></option>
+                    <option value="Vähähiilihydraattinen"><?php echo $language['vähähiilihydraattinen']?></option>
 					  </select>
 				</div>
 				<div class="form-group">
 					<label for="groupname">
-						Reseptiryhmä
+          <?php echo $language['reseptiryhmä']?>
 					</label>
 					</br>
 					<select name="kategoriat2">
-						<option value="Alkuruoka">Alkuruoka</option>
-						<option value="Pääruoka">Pääruoka</option>
-						<option value="Aamu-, väli- ja iltapala">Aamu-, väli- ja iltapala</option>
-						<option value="Jälkiruoka">Jälkiruoka</option>
-						<option value="Salaatti">Salaatti</option>
-						<option value="Keitto">Keitto</option>
-						<option value="Juoma">Juoma</option>
+                    <option value="Alkuruoka"><?php echo $language['alkuruoka']?></option>
+                    <option value="Pääruoka"><?php echo $language['pääruoka']?></option>
+                    <option value="Aamu-, väli- ja iltapala"><?php echo $language['välipala']?></option>
+                    <option value="Jälkiruoka"><?php echo $language['jälkiruoka']?></option>
+                    <option value="Salaatti"><?php echo $language['salaatti']?></option>
+                    <option value="Keitto"><?php echo $language['keitto']?></option>
+                    <option value="Juoma"><?php echo $language['juoma']?></option>
 					  </select>
 				</div>
 				<button type="submit" class="btn btn-primary">
-					Hae
+        <?php echo $language['etsi']?>
         </button>
         </form>
    
@@ -85,13 +88,13 @@
             <table class="table table-striped table-sm">
 				<thead>
 					<tr>
-						<th>Reseptinimi</th>
-						<th>Käyttäjä</th>
-						<th>Annoksia</th>
-						<th>Ohje</th>
-						<th>Ruokavalio</th>
-						<th>Reseptiryhmä</th>
-						<th>Avaa</th>
+						<th><?php echo $language['reseptinimi']?></th>
+						<th><?php echo $language['käyttäjä']?></th>
+						<th><?php echo $language['annoksia']?></th>
+						<th><?php echo $language['ohje']?></th>
+						<th><?php echo $language['ruokavalio']?></th>
+						<th><?php echo $language['reseptiryhmä']?></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -102,9 +105,6 @@
                     
 				</tbody>
 			</table>
-				
-			<button id="new">Avaa</button>
-          </div>
           
    	</div>
     </div>
