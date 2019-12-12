@@ -1,5 +1,6 @@
 <?php
 include_once("DataBase.php");
+include_once("Language.php");
 $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
 $kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
 $ainesosa = filter_input(INPUT_GET, 'ainesosa', FILTER_SANITIZE_STRING);
@@ -15,16 +16,17 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Jere Leskinen, Matleena Laitila, Samuli Reinikka, Marika Piuva">
-    <title>Recibo - reseptikirja</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/tyylit.css" rel="stylesheet">
+    <title><?php echo $language['title']?></title>
     
    </head>
   <body class="bg" style="background-image: url('css/salad.jpg');">
   <h1>
-    Recibo <small>Reseptejä joka hetkeen</small>
+  <div><a class="kielet" href="index.php?language=fi"><?php echo $language['language-fi']?></a><a class="kielet" href="index.php?language=en"><?php echo $language['language-en']?></a></div>
+    Recibo <small><?php echo $language['title']?></small>
   </h1>
   <div class="container-fluid">
     <div class="row">
@@ -35,13 +37,13 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Etusivu<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php"><?php echo $language['homepage']?><span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="random.php">Arvo resepti</a>
+                    <a class="nav-link" href="random.php"><?php echo $language['random']?></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="save.php">Lisää resepti</a>
+                    <a class="nav-link" href="save.php"><?php echo $language['add']?></a>
                   </li>
                 </ul>
               </div>
@@ -56,41 +58,42 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
             
           </div>
           <div class="advance-search form-group">
-            <h2 class="desc">Etsi reseptejä</h2>
+            <h2 class="desc"><?php echo $language['find']?></h2>
             <div class="row">
               <div class="input-field">
                 <div class="input-select">
                   <select data-trigger="" name="kategoriat1">
-                    <option placeholder="" value="">Ruokavalio</option>
-                    <option value="Kasvisruoka">Kasvisruoka</option>
-                    <option value="Liharuoka">Liharuoka</option>
-                    <option value="Gluteeniton">Gluteeniton</option>
-                    <option value="Maidoton">Maidoton</option>
-                    <option value="Kananmunaton">Kananmunaton</option>
-                    <option value="Vegaaninen">Vegaaninen</option>
-                    <option value="Sokeriton">Sokeriton</option>
-                    <option value="Vähähiilihydraattinen">Vähähiilihydraattinen</option>
+                    <option placeholder="" value=""><?php echo $language['ruokavalio']?></option>
+                    <option value="Kasvisruoka"><?php echo $language['kasvisruoka']?></option>
+                    <option value="Liharuoka"><?php echo $language['liharuoka']?></option>
+                    <option value="Gluteeniton"><?php echo $language['gluteeniton']?></option>
+                    <option value="Maidoton"><?php echo $language['maidoton']?></option>
+                    <option value="Kananmunaton"><?php echo $language['kananmunaton']?></option>
+                    <option value="Vegaaninen"><?php echo $language['vegaaninen']?></option>
+                    <option value="Sokeriton"><?php echo $language['sokeriton']?></option>
+                    <option value="Vähähiilihydraattinen"><?php echo $language['vähähiilihydraattinen']?></option>
                   </select>
                 </div>
               </div>
               <div class="input-field">
                 <div class="input-select">
                   <select data-trigger="" name="kategoriat2">
-                    <option placeholder="" value="">Reseptiryhmä</option>
-                    <option value="Alkuruoka">Alkuruoka</option>
-                    <option value="Pääruoka">Pääruoka</option>
-                    <option value="Aamu-, väli- ja iltapala">Aamu-, väli- ja iltapala</option>
-                    <option value="Jälkiruoka">Jälkiruoka</option>
-                    <option value="Salaatti">Salaatti</option>
-                    <option value="Keitto">Keitto</option>
-                    <option value="Juoma">Juoma</option>
+                    <option placeholder="" value=""><?php echo $language['reseptiryhmä']?></option>
+                    <option value="Alkuruoka"><?php echo $language['alkuruoka']?></option>
+                    <option value="Pääruoka"><?php echo $language['pääruoka']?></option>
+                    <option value="Aamu-, väli- ja iltapala"><?php echo $language['välipala']?></option>
+                    <option value="Jälkiruoka"><?php echo $language['jälkiruoka']?></option>
+                    <option value="Salaatti"><?php echo $language['salaatti']?></option>
+                    <option value="Keitto"><?php echo $language['keitto']?></option>
+                    <option value="Juoma"><?php echo $language['juoma']?></option>
                   </select>
                 </div>
               </div>
               <div class="input-field">
                 <div class="input-select">
                   <select data-trigger="" name="ainesosa">
-                    <option placeholder="" value="">Ainesosa</option>
+                    <!-- ainesosat tulee tietokannasta, joten niitä ei voi kääntää englanniksi -->
+                    <option placeholder="" value=""><?php echo $language['ainesosa']?></option>
                     <tbody>
                       <?php
                           $dataBase = new DataBase();
@@ -106,7 +109,7 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
               <div class="result-count"></div>
                 <div class="group-btn">
                   <!--<button class="btn-delete" id="delete" onclick="hideDiv('reseptilaatikko'); showDiv('uusimmatreseptit');">Tyhjennä</button>-->
-                  <input type="submit" value="Etsi" class="btn-search"></input>
+                  <input type="submit" value="<?php echo $language['etsi']?>" class="btn-search"></input>
                     <script type="text/javascript">
                       function showDiv(reseptilaatikko){
                       document.getElementById(reseptilaatikko).style.display = 'block';
@@ -138,7 +141,7 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
             <table name="ID" class="formit ">
               
             <div  name="ID" class="form-group formit" id="reseptilaatikko" style="display:block">
-                  <h2>Hakutulokset</h2>
+                  <h2><?php echo $language['hakutulokset']?></h2>
                   </br>
                   <?php
                             $dataBase = new DataBase();
@@ -146,7 +149,7 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
                   ?>
                 </div>
                 <div name="ID" class="form-group formit " id="uusimmatreseptit" style="display:block">
-                  <h2>Uusimmat reseptit</h2>    
+                  <h2><?php echo $language['uusimmat']?></h2>    
                   </br>
                   <?php
                             $dataBase = new DataBase();

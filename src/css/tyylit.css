@@ -26,7 +26,10 @@ a:hover {
   color: rgb(78, 107, 64);
 }
 
-
+.kielet {
+  font-size: small;
+  display: inline-block;
+}
 
 .jumbotron {
     padding: 2rem 1rem;
@@ -90,7 +93,7 @@ select {
   padding: 20px;
   padding-top: 30px;
   clear: both;
-  margin-bottom: -200px !IMPORTANT;
+  margin-bottom: -250px !IMPORTANT;
 }
 #reseptiohje {
   margin-bottom: 100px !IMPORTANT;

@@ -1,11 +1,7 @@
 <?php
 include_once("DataBase.php");
-//$kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
-//$kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);
-//$ainesosa = filter_input(INPUT_GET, 'ainesosa', FILTER_SANITIZE_STRING);
-//$recipename = filter_input(INPUT_GET, 'recipename', FILTER_SANITIZE_STRING);
+include_once("Language.php");
 $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
-//miten saan oikean reseptin tiedot näkymään tällä sivulla?
 ?>
 
 
@@ -17,17 +13,18 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Jere Leskinen, Matleena Laitila, Samuli Reinikka, Marika Piuva">
-    <title>Recibo - reseptikirja</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/tyylit.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <title><?php echo $language['title']?></title>
+    
    </head>
-
   <body class="bg" style="background-image: url('css/salad.jpg');">
   <h1>
-    Recibo <small>Reseptejä joka hetkeen</small>
+  <div><a class="kielet" href="recipe.php?language=fi"><?php echo $language['language-fi']?></a><a class="kielet" href="recipe.php?language=en"><?php echo $language['language-en']?></a></div>
+    Recibo <small><?php echo $language['title']?></small>
   </h1>
   <div class="container-fluid">
     <div class="row">
@@ -38,13 +35,13 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Etusivu<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php"><?php echo $language['homepage']?><span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="random.php">Arvo resepti</a>
+                    <a class="nav-link" href="random.php"><?php echo $language['random']?></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="save.php">Lisää resepti</a>
+                    <a class="nav-link" href="save.php"><?php echo $language['add']?></a>
                   </li>
                 </ul>
               </div>
@@ -59,7 +56,7 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
                             $dataBase = new DataBase();
                             $dataBase->searchRecipeById("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost",$reseptiId);
                     ?>
-                <a href="index.php">Etusivulle</a>
+                <a href="index.php"><?php echo $language['homepage']?></a>
             </div>
         </table>
     </div>
