@@ -50,17 +50,17 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
     </div>
 
     <div class="s009">
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <div class="inner-form indexform">
+    <form role="form" action="Index.php" method="get" >
+        <div class="inner-form indexform form-group">
           <div class="basic-search">
             
           </div>
-          <div class="advance-search">
+          <div class="advance-search form-group">
             <h2 class="desc">Etsi reseptejä</h2>
             <div class="row">
               <div class="input-field">
                 <div class="input-select">
-                  <select data-trigger="" name="choices-single-defaul kategoriat1">
+                  <select data-trigger="" name="kategoriat1">
                     <option placeholder="" value="">Ruokavalio</option>
                     <option value="Kasvisruoka">Kasvisruoka</option>
                     <option value="Liharuoka">Liharuoka</option>
@@ -75,7 +75,7 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
               </div>
               <div class="input-field">
                 <div class="input-select">
-                  <select data-trigger="" name="choices-single-defaul kategoriat2">
+                  <select data-trigger="" name="kategoriat2">
                     <option placeholder="" value="">Reseptiryhmä</option>
                     <option value="Alkuruoka">Alkuruoka</option>
                     <option value="Pääruoka">Pääruoka</option>
@@ -89,7 +89,7 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
               </div>
               <div class="input-field">
                 <div class="input-select">
-                  <select data-trigger="" name="choices-single-defaul ainesosa">
+                  <select data-trigger="" name="ainesosa">
                     <option placeholder="" value="">Ainesosa</option>
                     <tbody>
                       <?php
@@ -105,8 +105,8 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
               <div class="input-field">
               <div class="result-count"></div>
                 <div class="group-btn">
-                  <button class="btn-delete" id="delete" onclick="hideDiv('reseptilaatikko'); showDiv('uusimmatreseptit');">Tyhjennä</button>
-                  <input href="index.php" type="button" value="Etsi" class="btn-search" onclick=" hideDiv('uusimmatreseptit'); showDiv('reseptilaatikko');"></input>
+                  <!--<button class="btn-delete" id="delete" onclick="hideDiv('reseptilaatikko'); showDiv('uusimmatreseptit');">Tyhjennä</button>-->
+                  <input type="submit" value="Etsi" class="btn-search"></input>
                     <script type="text/javascript">
                       function showDiv(reseptilaatikko){
                       document.getElementById(reseptilaatikko).style.display = 'block';
@@ -119,15 +119,33 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
                       }
                     </script>
                 </div>
+                  <div>
+                <?php
+                            $dataBase = new DataBase();
+                            $dataBase->searchRecipe2("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost");
+                  ?>
+                  </div>
               </div>
             </div>
           </div>
         </div>
       </form>
+        </br>
+        </br>
+        </br>
+        </br>
       <div>
-            <table name="ID" class="table table-striped table-sm formit">
+            <table name="ID" class="formit ">
               
-                <div name="ID" class="table-responsive formit" id="uusimmatreseptit" style="display:block">
+            <div  name="ID" class="form-group formit" id="reseptilaatikko" style="display:block">
+                  <h2>Hakutulokset</h2>
+                  </br>
+                  <?php
+                            $dataBase = new DataBase();
+                            $dataBase->searchRecipe2("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost");
+                  ?>
+                </div>
+                <div name="ID" class="form-group formit " id="uusimmatreseptit" style="display:block">
                   <h2>Uusimmat reseptit</h2>    
                   </br>
                   <?php
@@ -135,15 +153,6 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
                             $dataBase->searchAllRecipes("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost");
                   ?>
                 </div>
-                <div  name="ID" class="table-responsive formit" id="reseptilaatikko" style="display:none">
-                  <h2>Hakutulokset</h2>
-                  </br>
-                  <?php
-                            $dataBase = new DataBase();
-                            $dataBase->searchRecipe("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost",$kategoria1);
-                  ?>
-                </div>
-              
 			      </table>
       </div>
           
