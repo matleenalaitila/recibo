@@ -1,4 +1,8 @@
 <?php
+/**
+ * Author: Matleena Laitila
+ * 
+ */
 include_once("DataBase.php");
 include_once("Language.php");
 $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);

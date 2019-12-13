@@ -1,4 +1,8 @@
 <?php
+/**
+ * Author: Matleena Laitila
+ * 
+ */
 include_once("DataBase.php");
 include_once("Language.php");
 $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
@@ -92,7 +96,7 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
               <div class="input-field">
                 <div class="input-select">
                   <select data-trigger="" name="ainesosa">
-                    <!-- ainesosat tulee tietokannasta, joten niitä ei voi kääntää englanniksi -->
+                    <!-- ainesosat tulee tietokannasta-->
                     <option placeholder="" value=""><?php echo $language['ainesosa']?></option>
                     <tbody>
                       <?php
@@ -108,7 +112,6 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
               <div class="input-field">
               <div class="result-count"></div>
                 <div class="group-btn">
-                  <!--<button class="btn-delete" id="delete" onclick="hideDiv('reseptilaatikko'); showDiv('uusimmatreseptit');">Tyhjennä</button>-->
                   <input type="submit" value="<?php echo $language['etsi']?>" class="btn-search"></input>
                     <script type="text/javascript">
                       function showDiv(reseptilaatikko){
@@ -123,6 +126,8 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
                     </script>
                 </div>
                   <div>
+                  <!-- Tulostin hakutulokset tähän, koska en saanut reseptilaatikko
+                  ID:llä olevaa diviä näkymään yllä olevan submit-painikkeen klikkauksella-->
                 <?php
                             $dataBase = new DataBase();
                             $dataBase->searchRecipe2("resepti1","56L9R7N6F3Otw3Ur","resepti1","localhost");

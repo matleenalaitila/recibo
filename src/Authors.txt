@@ -1,0 +1,15 @@
+Tämä on 2c-projektiryhmän virtuaalinen reseptikirja -verkkopalvelu. 
+
+Tekijät: Matleena Laitila, Marika Piuva, Samuli Reinikka ja Jere Leskinen
+
+
+Alla kerrottu, mitä kukin on projektissa tehnyt. 
+
+Matleena: Ulkoasu, navigointi, index.php, recipe.php, hieman save.php:ta, monikielisyyden php:t ja monikielisyyden tekeminen
+etusivulle, reseptisivulle, otsikkoon ja navigointiin. Database-luokkaan olen tehnyt oliot, joita käytin indexissä ja recipessä.
+
+Marika:
+
+Samuli:
+
+Jere: On tehnyt hieman verkkosivuston pohjaa, mutta ei ole osallistunut muuten kehittämiseen.

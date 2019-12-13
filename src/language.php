@@ -1,4 +1,8 @@
 <?php
+/**
+ * Author: Matleena Laitila
+ * 
+ */
 session_start();
 
 if (!isset($_SESSION['language'])) {
