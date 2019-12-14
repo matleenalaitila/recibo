@@ -11,5 +11,7 @@ etusivulle, reseptisivulle, otsikkoon ja navigointiin. Database-luokkaan olen te
 Marika:
 
 Samuli:
+Projektin olio suunnittelu ja olio pohjan tekeminen, DataBase luokkaan paljon, monikielisyyttä lisännyt save.php:hen
+DataBase luokkaan olen tehnyt saveRecipe metodin ja tallenna.php:n
 
 Jere: On tehnyt hieman verkkosivuston pohjaa, mutta ei ole osallistunut muuten kehittämiseen.

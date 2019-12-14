@@ -108,11 +108,12 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
                 </div>
               </div>
             </div>
-            <div class="row third">
+            <div class="row third" id="count">
               <div class="input-field">
-              <div class="result-count"></div>
+              <div class="result-count">
                 <div class="group-btn">
-                  <input type="submit" value="<?php echo $language['etsi']?>" class="btn-search"></input>
+                  <input type="submit" id="b1" value="<?php echo $language['etsi']?>" class="btn-search"></input>
+                    
                     <script type="text/javascript">
                       function showDiv(reseptilaatikko){
                       document.getElementById(reseptilaatikko).style.display = 'block';
@@ -123,6 +124,11 @@ $reseptiId = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
                       function hideDiv(uusimmatreseptit){
                       document.getElementById(uusimmatreseptit).style.display = 'none';
                       }
+                      $( "#b1" ).click(function() {
+                     $( "#count" ).hide( "fast", function() {
+                    alert( "Animation complete." );
+                     });
+                    });
                     </script>
                 </div>
                   <div>
