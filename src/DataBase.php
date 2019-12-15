@@ -9,8 +9,9 @@
 public function haerdmResepti($username, $password, $database, $host) {
         
 $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
-	$kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);	
-        
+$kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);	
+$recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
+
         try {
         
             $conn = new PDO("mysql:host=$host;dbname=$database;charset=utf8", $username, $password);
@@ -54,7 +55,7 @@ $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
                 $reseptinimi = $row->recipename;
                 
                 //printtaa linkin josta ko. reseptin saa koko sivulle
-                print "<td><a href='edit.php?astunnus=$reseptinimi'>Avaa</a></td>";
+                print "<td><a href='view.php?recipe=$row->ID'>Avaa</a></td>";
                 
                 // printtaa HTML-dokumenttii </tr> lopetustagin
                 print "</tr>";
@@ -268,7 +269,9 @@ $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
 	
 		// suljetaan tietokantayhteys
         $connection = null;
-    }
+	}
+	
+	//haetaan satunnaisen reseptin tarkemmat tiedot omalle sivulle view.php
     public function viewRecipe($username, $password, $database, $host, $ID){
 		//asetellaan muuttujilla arvot
 		
@@ -277,7 +280,7 @@ $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
         $password = "56L9R7N6F3Otw3Ur";
 		$dbname = "resepti1";
 		$reseptiId = filter_input(INPUT_GET, 'recipe', FILTER_SANITIZE_STRING);
-		
+
 
 		try {
 			$connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -291,36 +294,46 @@ $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
 			$statement = $connection->prepare("SELECT * FROM recipe WHERE ID=:ID");
 			$statement->bindParam(':ID', $reseptiId);
 			$statement->execute();
-			
-			$statement = $connection->prepare("SELECT amount, ingredient, measure FROM ingredient where recipeid=ID");
-			$statement->bindParam(':ID', $reseptiId);
-			$statement->execute();
-			
 
 			// vaihdetaan hakumoodiksi objecti
 			$statement->setFetchMode(PDO::FETCH_OBJ);
 	
 			//haetaan kaikki rivit
 			$result = $statement->fetchAll();
-	
-	
-			//commit (hyväksytään transaktio)
-            $connection->commit();
             
-			
-
             foreach($result as $row) {
-				
+				print "<p>";
 				print "<h2>$row->recipename</h2>";
+				print "<p><img src='$row->image' />";
+				print "<p><br></p>";
 				print "<i>$row->instruction</i>";
-				print "<i>$row->ingredient</i>";
-				//pitäisi saada tulostettua ainesosat, joita on useampi per resepti, kuva olisi myös kiva
+				print "</p>";
 			}
 			
+			$statement2 = $connection->prepare("SELECT amount, ingredient, measure FROM ingredient where recipeid=:ID");
+            $statement2->bindParam(':ID', $reseptiId);
+            $statement2->execute();
+    
+            // vaihdetaan hakumoodiksi objecti
+            $statement2->setFetchMode(PDO::FETCH_OBJ);
+
+            //haetaan kaikki rivit
+			$result = $statement2->fetchAll();
+			
+			//commit
+			$connection->commit();
+            
+            foreach($result as $row) {
+				print "<p>";
+				print "<i>$row->ingredient </i>";
+                print "<i>$row->amount </i>";
+				print "<i>$row->measure </i>";
+                print "</p>";
+            }   
+
 		}
 		catch(PDOException $e)
 		{
-	
 			// rollback eli perutaan transaktio
 			$connection->rollback();
 			echo "Tietokantavirhe: " . $e->getMessage();

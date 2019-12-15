@@ -105,3 +105,18 @@ select {
   color: black;
   text-decoration: underline;
 }
+
+img {
+  max-width: 30%;
+}
+
+#ohje {
+  display: block;
+  margin: auto;
+  padding-top: 30px;
+  font-family: Cambria;
+  width: auto;
+  height: auto;
+  font-size: 12px;
+  line-height: inherit;
+}
