@@ -106,22 +106,37 @@ select {
   text-decoration: underline;
 }
 
-img {
+#kuvaohje {
   max-width: 30%;
 }
 
-#ohje {
-  display: block;
-  margin: auto;
-  padding-top: 30px;
-  font-family: Cambria;
-  width: auto;
+img {
+  max-width: 33%;
+  float: right;
   height: auto;
-  font-size: 12px;
-  line-height: inherit;
+}
+
+#ohje {
+  padding-top: 5%;
+  float: left;
+  max-width: 80%;
+  max-height: 100%;
+  margin-top: 2%;
+  margin-left: 5%;
+  font-size: 18px;
+}
+
+#ohje2 {
+  clear: both;
+  float: left;
+  margin-top: 0%;
+  margin-left: 5%;
+  line-height: 30px;
 }
 
 #maarat{
   margin-bottom: 1%;
   margin-top: 1%;
 }
+
+/*  */
