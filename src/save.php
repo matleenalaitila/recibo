@@ -93,7 +93,7 @@ include("language.php");
 						<option value="Kananmunaton">Kananmunaton</option>
 						<option value="Vegaaninen">Vegaaninen</option>
 						<option value="Sokeriton">Sokeriton</option>
-						<option value="Vähähiilihydraattinen">Vähähiilihydraattinen</option>
+						<option value="Vahahiilihydraattinen">Vähähiilihydraattinen</option>
 					  </select>
 				</div>
 				<div class="form-group">
@@ -103,9 +103,9 @@ include("language.php");
 					</br>
 					<select name="kategoriat2">
 						<option value="Alkuruoka">Alkuruoka</option>
-						<option value="Pääruoka">Pääruoka</option>
-						<option value="Aamu-, väli- ja iltapala">Aamu-, väli- ja iltapala</option>
-						<option value="Jälkiruoka">Jälkiruoka</option>
+						<option value="Paaruoka">Pääruoka</option>
+						<option value="Aamu-, vali- ja iltapala">Aamu-, väli- ja iltapala</option>
+						<option value="Jalkiruoka">Jälkiruoka</option>
 						<option value="Salaatti">Salaatti</option>
 						<option value="Keitto">Keitto</option>
 						<option value="Juoma">Juoma</option>

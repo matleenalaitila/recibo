@@ -424,7 +424,7 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
 
 		try {
 			
-			$connection = new PDO("mysql:host=$host;dbname=$database;charset=utf8", $username, $password);
+			$connection = new PDO("mysql:host=$host;dbname=$database;", $username, $password);
 			// set the PDO error mode to exception
 			$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
