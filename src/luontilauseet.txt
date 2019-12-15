@@ -1,0 +1,112 @@
+CREATE TABLE rk_user (
+ID INT(4) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+username CHAR(20),
+email CHAR(40)
+);
+
+INSERT INTO rk_user (username,email) VALUES  ('Masa99', 'matti.meikalainen@gmail.com');
+INSERT INTO rk_user (username,email) VALUES ('Maija1', 'maija.meikalainen@gmail.com');
+INSERT INTO rk_user (username,email) VALUES ('Meiju', 'meiju.meikalainen@gmail.com');
+
+CREATE TABLE rk_group (
+ID INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+groupname CHAR(40)
+);
+
+INSERT INTO rk_group (groupname) VALUES ('Alkuruoka');
+INSERT INTO rk_group (groupname) VALUES ('Pääruoka');
+INSERT INTO rk_group (groupname) VALUES ('Jälkiruoka');
+INSERT INTO rk_group (groupname) VALUES ('Leivonnaiset');
+INSERT INTO rk_group (groupname) VALUES ('Salaatti');
+INSERT INTO rk_group (groupname) VALUES ('Keitto');
+INSERT INTO rk_group (groupname) VALUES ('Aamu-, väli- ja iltapala');
+INSERT INTO rk_group (groupname) VALUES ('Juoma');
+
+
+CREATE TABLE recipe (
+ID INT(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+recipename CHAR(30),
+timestamp DATETIME(6),
+userid INT(4),
+port SMALLINT(2),
+image CHAR(60),
+instruction TEXT(500),
+diet CHAR(30),
+recipegroup CHAR(30),
+rk_group INT(2),
+FOREIGN KEY (rk_group) REFERENCES rk_group(ID),
+FOREIGN KEY (userid) REFERENCES rk_user(ID)
+);
+
+INSERT INTO recipe (recipename,timestamp,userid,port,image,instruction,diet,recipegroup,rk_group) VALUES ('Perunasose', '2019-11-02 21:00:23',1, '4', '.\img\1_perunasose.jpg', 'Keitä paloitellut, kuoritut perunat suolatussa vedessä kypsiksi. Kaada pois vesi. Lämmitä neste ja voi ja vatkaa ne perunoiden sekaan', 'Kasvisruoka','Pääruoka',2);
+INSERT INTO recipe (recipename,timestamp,userid,port,image,instruction,diet,recipegroup,rk_group) VALUES ('Uunilohi','2019-11-1 12:54:23',2, '4', '.\img\2_uunilohi.jpg', 'Aseta lohifilee uunivuokaan, mausta ja laita uuniin 200C 20min tai kunnes kypsä.', 'Liharuoka','Pääruoka',2);
+INSERT INTO recipe (recipename,timestamp,userid,port,image,instruction,diet,recipegroup,rk_group) VALUES ('Mansikkarahka','2019-11-11 22:54:23',2, '4', '.\img\3_mansikkarahka.jpg', 'Sekoita maitorahka,mehukeitto ja marjat. Mausta halutessasi sokerilla.', 'Vähähiilihydraattinen','Aamu-, väli- ja iltapala',7);
+
+
+CREATE TABLE comment(
+ID INT(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+recipeid INT(5),
+username CHAR(15),
+timestamp DATETIME(6),
+comment TEXT(500),
+FOREIGN KEY (recipeid) REFERENCES recipe(ID)
+);
+
+INSERT INTO comment (recipeid,username,timestamp,comment) VALUES ('1','Masa99','2019-11-25 21:54:23', 'Maistuva muusi tuli!');
+INSERT INTO comment (recipeid,username,timestamp,comment) VALUES ('2','Masa99','2019-11-25 21:59:23', 'Hyvä resepti!');
+
+CREATE TABLE diet (
+dietnumber INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+dietname CHAR(30),
+recipeid INT(5),
+FOREIGN KEY (recipeid) REFERENCES recipe(ID)
+);
+
+INSERT INTO diet (dietnumber, dietname,recipeid) VALUES (1,'Kasvisruoka',1);
+INSERT INTO diet (dietnumber, dietname,recipeid) VALUES (2,'Liharuoka',2);
+INSERT INTO diet (dietnumber, dietname,recipeid) VALUES (3,'Gluteeniton',NULL);
+INSERT INTO diet (dietnumber, dietname,recipeid) VALUES (4,'Maidoton',NULL);
+INSERT INTO diet (dietnumber, dietname,recipeid) VALUES (5,'Kananmunaton',NULL);
+INSERT INTO diet (dietnumber, dietname,recipeid) VALUES (6,'Vegaaninen',NULL);
+INSERT INTO diet (dietnumber, dietname,recipeid) VALUES (7,'Sokeriton',NULL);
+INSERT INTO diet (dietnumber, dietname,recipeid) VALUES (8,'Vähähiilihydraattinen',3);
+
+
+CREATE TABLE ingredient (
+ID INT(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+recipeid INT(5),
+ingredient CHAR(50),
+amount INT(3),
+measure CHAR(10),
+FOREIGN KEY (recipeid) REFERENCES recipe(ID)
+);
+
+INSERT INTO ingredient (recipeid,ingredient,amount,measure) VALUES ('1','vesi', '10', 'dl');
+INSERT INTO ingredient (recipeid,ingredient,amount,measure) VALUES ('1','peruna', '1000', 'g');
+INSERT INTO ingredient (recipeid,ingredient,amount,measure) VALUES ('1','voi', '25', 'g');
+INSERT INTO ingredient (recipeid,ingredient,amount,measure) VALUES ('1','maito', '1', 'dl');
+INSERT INTO ingredient (recipeid,ingredient,amount,measure) VALUES ('2','kirjolohi', '1000', 'g');
+INSERT INTO ingredient (recipeid,ingredient,amount,measure) VALUES ('3','maitorahka', '1000', 'g');
+INSERT INTO ingredient (recipeid,ingredient,amount,measure) VALUES ('3','mansikkakeitto', '3', 'dl');
+INSERT INTO ingredient (recipeid,ingredient,amount,measure) VALUES ('3','mansikka', '500', 'g');
+
+CREATE TABLE material (
+ID INT(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+rawmaterial CHAR(35),
+kcal_100 INT(5),
+protein_100 INT(3),
+carbohydrate_100 INT(3),
+fat_100 INT(3),
+measure CHAR(10),
+ingredientid INT(5),
+FOREIGN KEY (ingredientid) REFERENCES ingredient(ID)
+);
+
+INSERT INTO material (rawmaterial,kcal_100,protein_100,carbohydrate_100,fat_100,measure,ingredientid) VALUES ('peruna','75','1.99','15.5', '0.1','g',2);
+INSERT INTO material (rawmaterial,kcal_100,protein_100,carbohydrate_100,fat_100,measure,ingredientid) VALUES ('vesi','0','0','0', '0','dl',1);
+INSERT INTO material (rawmaterial,kcal_100,protein_100,carbohydrate_100,fat_100,measure,ingredientid) VALUES ('maito','47','3.1','5.0', '1.6','dl',4);
+INSERT INTO material (rawmaterial,kcal_100,protein_100,carbohydrate_100,fat_100,measure,ingredientid) VALUES ('voi','727','1.2','0.8', '81.3','g',3);
+INSERT INTO material (rawmaterial,kcal_100,protein_100,carbohydrate_100,fat_100,measure,ingredientid) VALUES ('kirjolohi','153','16.8','0', '9.6','g',5);
+INSERT INTO material (rawmaterial,kcal_100,protein_100,carbohydrate_100,fat_100,measure,ingredientid) VALUES ('maitorahka','59','9.8','3.0', '0.4','g',6);
+INSERT INTO material (rawmaterial,kcal_100,protein_100,carbohydrate_100,fat_100,measure,ingredientid) VALUES ('mansikkakeitto','53','0.1','12.2', '0','g',7);
+INSERT INTO material (rawmaterial,kcal_100,protein_100,carbohydrate_100,fat_100,measure,ingredientid) VALUES ('mansikka','45','0.5','7.7', '0.3','g',8);

@@ -1,11 +1,14 @@
 <?php
-
+// Author: Marika Piuva, Matleena Laitila, Samuli Reinikka
     class DataBase {
     
     
 
        
-  
+// haerdmResepti
+// gets a random recipe from database depending on search values
+// prints on table in random.php
+// Author: Marika Piuva
 public function haerdmResepti($username, $password, $database, $host) {
         
 $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
@@ -23,30 +26,21 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
 			$statement = $conn->prepare($sql);
         	$statement->execute();
 
-			
-	
 			//haetaan kaikki rivit
 			$row = $statement->fetch(PDO::FETCH_OBJ);
 	
-	
 			//commit (hyväksytään transaktio)
-		    
             $conn->commit();
 
-
-            
-                // printtaa HTML-dokumenttiin <tr> tagin
+            // printtaa taulukkoon arvot
             if($row != null){
                 echo "<tr>";
-				
 				echo "<td>";	
                     echo $row->recipename;
                 echo "</td>";
-                
                 echo "<td>";
                     print $row->userid;
                 echo "</td>";
-            
                 echo "<td>" . $row->port . "</td>";
                 echo "<td>" . $row->instruction . "</td>";
                 echo "<td>" . $row->diet . "</td>";
@@ -60,12 +54,10 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
                 // printtaa HTML-dokumenttii </tr> lopetustagin
                 print "</tr>";
              }
-        
             
         }
             catch(PDOException $e)
             {
-        
                 // rollback eli perutaan transaktio
                 $conn->rollback();
                 echo "Tietokantavirhe: " . $e->getMessage();
@@ -73,7 +65,6 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
             
      $conn = null;
 	}
-	
 	
 	/**
 	 * searchAllRecipes
@@ -188,7 +179,9 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
         $connection = null;
 	}
 	
-	//haetaan satunnaisen reseptin tarkemmat tiedot omalle sivulle view.php
+// viewRecipe
+// link to recipe from random.php opens to view.php where more details are shown from database
+// Author: Marika Piuva
     public function viewRecipe($username, $password, $database, $host, $ID){
 		//asetellaan muuttujilla arvot
 		
@@ -197,7 +190,6 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
         $password = "56L9R7N6F3Otw3Ur";
 		$dbname = "resepti1";
 		$reseptiId = filter_input(INPUT_GET, 'recipe', FILTER_SANITIZE_STRING);
-
 
 		try {
 			$connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -220,10 +212,11 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
             
             foreach($result as $row) {
 				print "<p>";
+				print "<div id='ohje'>";
 				print "<h2>$row->recipename</h2>";
 				print "<p><img src='$row->image' />";
-				print "<p><br></p>";
 				print "<i>$row->instruction</i>";
+				print "</div>";
 				print "</p>";
 			}
 			
@@ -242,9 +235,11 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
             
             foreach($result as $row) {
 				print "<p>";
+				print "<div id='ohje2'>";
 				print "<i>$row->ingredient </i>";
                 print "<i>$row->amount </i>";
 				print "<i>$row->measure </i>";
+				print "</div>";
                 print "</p>";
             }   
 

@@ -1,4 +1,7 @@
 <?php
+
+// Author: Marika Piuva
+
   include("DataBase.php");
   include_once("Language.php");
   $kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);

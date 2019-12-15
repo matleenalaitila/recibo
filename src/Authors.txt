@@ -8,7 +8,7 @@ Alla kerrottu, mitä kukin on projektissa tehnyt.
 Matleena: Ulkoasu, navigointi, index.php, recipe.php, hieman save.php:ta, monikielisyyden php:t ja monikielisyyden tekeminen
 etusivulle, reseptisivulle, otsikkoon ja navigointiin. Database-luokkaan olen tehnyt oliot, joita käytin indexissä ja recipessä.
 
-Marika: Sivustopohja, ulkoasu, random.php, view.php, monikielisyyttä random.php, database.php olio view.php:hen
+Marika: Sivustopohja, ulkoasu, random.php, view.php, monikielisyyttä random.php, database.php olio view.php:hen ja random.php
 
 Samuli:
 Projektin olio suunnittelu ja olio pohjan tekeminen, DataBase luokkaan paljon, monikielisyyttä lisännyt save.php:hen
