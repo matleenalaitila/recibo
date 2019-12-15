@@ -75,7 +75,14 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
 	}
 	
 	
-    public function searchAllRecipes($username, $password, $database, $host){
+	/**
+	 * searchAllRecipes
+	 * gets all recipenames and their ID:s from database and 
+	 * creates links of them to use on index.php
+	 * Author: Matleena Laitila
+	 * 
+	 */
+	public function searchAllRecipes($username, $password, $database, $host){
 		//asetellaan muuttujilla arvot
 		
         $servername = "localhost";
@@ -93,7 +100,7 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
 			$connection->beginTransaction();
 	
 			// tähän sql-komennot, jossa saadaan talteen tiedot
-			$statement = $connection->prepare("SELECT recipename FROM recipe ORDER BY timestamp");
+			$statement = $connection->prepare("SELECT recipename, ID FROM recipe ORDER BY timestamp");
         	$statement->execute();
 
 			// vaihdetaan hakumoodiksi objecti
@@ -108,7 +115,7 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
             
 
             foreach($result as $row) {
-                print "<a class='klikkaa' href='recipe.php?recipe=$recipename'>" . $row->recipename . "</a>";
+                print "<a class='klikkaa' href='recipe.php?recipe=$row->ID'>" . $row->recipename . "</a>";
             }
 		}
 		catch(PDOException $e)
@@ -124,103 +131,13 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
     }
 
 
-   public function searchFromDiet($username, $password, $database, $host){
-		//asetellaan muuttujilla arvot
-		
-        $servername = "localhost";
-        $username = "resepti1";
-        $password = "56L9R7N6F3Otw3Ur";
-        $dbname = "resepti1";
-	
-		try {
-			$connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-			// set the PDO error mode to exception
-			$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
-			//aloitetaan transaktio
-			$connection->beginTransaction();
-	
-			// tähän sql-komennot, jossa saadaan talteen tiedot
-			$statement = $connection->prepare("SELECT * FROM diet");
-        	$statement->execute();
 
-			// vaihdetaan hakumoodiksi objecti
-			$statement->setFetchMode(PDO::FETCH_OBJ);
-	
-			//haetaan kaikki rivit
-			$result = $statement->fetchAll();
-	
-	
-			//commit (hyväksytään transaktio)
-			$connection->commit();
-		
-		}
-		catch(PDOException $e)
-		{
-	
-			// rollback eli perutaan transaktio
-			$connection->rollback();
-			echo "Tietokantavirhe: " . $e->getMessage();
-		}
-	
-		// suljetaan tietokantayhteys
-        $connection = null;
-    }
-
-    public function searchRecipe($username, $password, $database, $host){
-		//asetellaan muuttujilla arvot
-		
-        $servername = "localhost";
-        $username = "resepti1";
-        $password = "56L9R7N6F3Otw3Ur";
-		$dbname = "resepti1";
-		$kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
-		$recipename = filter_input(INPUT_GET, 'recipename', FILTER_SANITIZE_STRING);
-		
-
-		try {
-			$connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-			// set the PDO error mode to exception
-			$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
-			//aloitetaan transaktio
-			$connection->beginTransaction();
-	
-			// tähän sql-komennot, jossa saadaan talteen tiedot
-			$statement = $connection->prepare("SELECT * FROM recipe WHERE diet='$kategoria1'");
-        	$statement->execute();
-
-			// vaihdetaan hakumoodiksi objecti
-			$statement->setFetchMode(PDO::FETCH_OBJ);
-	
-			//haetaan kaikki rivit
-			$result = $statement->fetchAll();
-	
-	
-			//commit (hyväksytään transaktio)
-            $connection->commit();
-            
-
-            foreach($result as $row) {
-				
-				$row->recipename;
-                
-                print "<a class='klikkaa' href='recipe.php?recipe=$recipename'>" . $row->recipename . "</a>";
-			}
-			
-		}
-		catch(PDOException $e)
-		{
-	
-			// rollback eli perutaan transaktio
-			$connection->rollback();
-			echo "Tietokantavirhe: " . $e->getMessage();
-		}
-	
-		// suljetaan tietokantayhteys
-        $connection = null;
-    }
-
+		/**
+	 * gets all of the ingredients from database and creates options of them to
+	 * use on index.php Ainesosa-category
+	 * Author: Matleena Laitila
+	 * 
+	 */
 
     public function searchIngredient($username, $password, $database, $host){
 		//asetellaan muuttujilla arvot
@@ -344,62 +261,20 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
     }
 
 
-	public function getRecipeInstruction($username, $password, $database, $host){
-		//asetellaan muuttujilla arvot
-		
-		$servername = "localhost";
-        $username = "resepti1";
-        $password = "56L9R7N6F3Otw3Ur";
-		$dbname = "resepti1";
-		
-		try {
-			$connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-			// set the PDO error mode to exception
-			$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
-			//aloitetaan transaktio
-			$connection->beginTransaction();
-	
-			// tähän sql-komennot, jossa saadaan talteen tiedot
-			$statement = $connection->prepare("SELECT instruction FROM recipe");
-        	$statement->execute();
-
-			// vaihdetaan hakumoodiksi objecti
-			$statement->setFetchMode(PDO::FETCH_OBJ);
-	
-			//haetaan kaikki rivit
-			$result = $statement->fetchAll();
-	
-	
-			//commit (hyväksytään transaktio)
-			$connection->commit();
-			
-			print "</br>";
-            foreach($result as $row) {
-			print "<p>" . $row->instruction . "</p>";
-			}
-			
-			
-
-		
-		}
-		catch(PDOException $e)
-		{
-	
-			// rollback eli perutaan transaktio
-			$connection->rollback();
-			echo "Tietokantavirhe: " . $e->getMessage();
-		}
-	
-		// suljetaan tietokantayhteys
-        $connection = null;
-	}
-
+	    /**
+		 * searchRecipe2
+		 * gets recipes from database according to selected categories and
+		 * creates links of their names to use on index.php
+		 * Author: Matleena Laitila
+		 * 
+		 */
 	public function searchRecipe2($username, $password, $database, $host) {
         
 		$kategoria1 = filter_input(INPUT_GET, 'kategoriat1', FILTER_SANITIZE_STRING);
-			$kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);	
-			$ainesosa = filter_input(INPUT_GET, 'ainesosa', FILTER_SANITIZE_STRING);	
+		$kategoria2 = filter_input(INPUT_GET, 'kategoriat2', FILTER_SANITIZE_STRING);	
+		$ainesosa = filter_input(INPUT_GET, 'ainesosa', FILTER_SANITIZE_STRING);	
+
+
 			$recipename = filter_input(INPUT_GET, 'recipename', FILTER_SANITIZE_STRING);	
 				try {
 				
@@ -416,7 +291,6 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
 					$statement->setFetchMode(PDO::FETCH_OBJ);
 			
 					//haetaan kaikki rivit
-					// $result = $statement->fetch();
 					$result = $statement->fetchAll();
 			
 					//commit (hyväksytään transaktio)
@@ -439,7 +313,17 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
 			 $conn = null;
 			}
 
-			public function searchRecipeById($username, $password, $database, $host, $reseptiId){
+
+
+
+	/**
+	 * searchRecipeById
+	 * gets and shows recipename, instruction and ingredients from database according 
+	 * to recipe that has been selected on index page
+	 * Author: Matleena Laitila
+	 * 
+	 */
+		public function searchRecipeById($username, $password, $database, $host, $reseptiId){
 		//asetellaan muuttujilla arvot
 		
         $servername = "localhost";
@@ -469,9 +353,6 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
 			$result = $statement->fetchAll();
 	
 	
-			//commit (hyväksytään transaktio)
-            $connection->commit();
-            
 			
 
             foreach($result as $row) {
@@ -479,7 +360,32 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
 				print "<h2>$row->recipename</h2>";
 				print "<i>$row->instruction</i>";
 			}
+
+					$sql2 = "SELECT amount, ingredient, measure FROM ingredient where recipeid=:ID";
+					$statement2 = $connection->prepare($sql2);
+					$statement2->bindParam(':ID', $reseptiId);
+
+					$statement2->execute();
+		
+					// vaihdetaan hakumoodiksi objecti
+					$statement2->setFetchMode(PDO::FETCH_OBJ);
 			
+					//haetaan kaikki rivit
+					$result = $statement2->fetchAll();
+			
+					//commit (hyväksytään transaktio)
+					
+					$connection->commit();
+
+					foreach($result as $row) {
+						print "<p>";
+						print "<div id='maarat'>";
+						print "<i>$row->ingredient </i>";
+						print "<i>$row->amount </i>";
+						print "<i>$row->measure </i>";
+						print "</div>";
+						print "</p>";
+					}   
 		}
 		catch(PDOException $e)
 		{
@@ -491,7 +397,8 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
 	
 		// suljetaan tietokantayhteys
         $connection = null;
-    }
+	}
+	
 /*author Samuli Reinikka */
 	
 	public function SaveRecipe($username, $password, $database, $host){

@@ -96,7 +96,7 @@ select {
   margin-bottom: -250px !IMPORTANT;
 }
 #reseptiohje {
-  margin-bottom: 100px !IMPORTANT;
+  margin-bottom: 10px !IMPORTANT;
 }
 
 
@@ -119,4 +119,9 @@ img {
   height: auto;
   font-size: 12px;
   line-height: inherit;
+}
+
+#maarat{
+  margin-bottom: 1%;
+  margin-top: 1%;
 }
