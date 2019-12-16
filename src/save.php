@@ -1,6 +1,7 @@
 <?php
 include("DataBase.php");
-include("language.php");	
+include("language.php");
+// Author: Samuli Reinikka	
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +16,8 @@ include("language.php");
     <link href="css/main.css" rel="stylesheet">
     <link href="css/tyylit.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <title><?php echo $language['title']?></title>
-    <script>
+	<title><?php echo $language['title']?></title>
+	<script>
 							function addRow() {
 							var table = document.getElementById("container");
 							var row = table.insertRow(2);
@@ -49,13 +50,13 @@ include("language.php");
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.php">Etusivu</a>
+                  <a class="nav-link" href="index.php"><?php echo $language['homepage']?></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="random.php">Arvo resepti</a>
+                  <a class="nav-link" href="random.php"><?php echo $language['random']?></a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="save.php">Lisää resepti<span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="save.php"><?php echo $language['add']?><span class="sr-only">(current)</span></a>
                 </li>
               </ul>
             </div>
@@ -64,63 +65,63 @@ include("language.php");
 		  <form class="formit" role="form" action="tallenna.php" method="POST">
 				<div class="form-group">
 					<label for="recipename">
-						Reseptin nimi
+						<p><?php echo $language['reseptinimi']?></p>
 					</label>
 					<input type="text" class="form-control" id="text1" name="reseptinimi">
 				</div>
 				<div class="form-group">
 					<label for="userid">
-						Käyttäjänimesi
+					<p><?php echo $language['käyttäjä']?></p>
 					</label>
 					<input type="text" class="form-control" id="text1" name="kayttaja">
 				</div>
 				<div class="form-group">
 					<label for="port">
-						Annosten määrä
+					<p><?php echo $language['annoksia']?></p>
 					</label>
 					<input type="number" class="form-control" id="text1" name="maara">
 				</div>
 				<div class="form-group">
 					<label for="diet">
-						Ruokavalio
+					<p><?php echo $language['ruokavalio']?></p>
 					</label>
 					</br>
 					<select name="kategoriat1">
-						<option value="Kasvisruoka">Kasvisruoka</option>
-						<option value="Liharuoka">Liharuoka</option>
-						<option value="Gluteeniton">Gluteeniton</option>
-						<option value="Maidoton">Maidoton</option>
-						<option value="Kananmunaton">Kananmunaton</option>
-						<option value="Vegaaninen">Vegaaninen</option>
-						<option value="Sokeriton">Sokeriton</option>
-						<option value="Vahahiilihydraattinen">Vähähiilihydraattinen</option>
+         			 <option value="Kasvisruoka"><?php echo $language['kasvisruoka']?></option>
+                    <option value="Liharuoka"><?php echo $language['liharuoka']?></option>
+                    <option value="Gluteeniton"><?php echo $language['gluteeniton']?></option>
+                    <option value="Maidoton"><?php echo $language['maidoton']?></option>
+                    <option value="Kananmunaton"><?php echo $language['kananmunaton']?></option>
+                    <option value="Vegaaninen"><?php echo $language['vegaaninen']?></option>
+                    <option value="Sokeriton"><?php echo $language['sokeriton']?></option>
+                    <option value="Vähähiilihydraattinen"><?php echo $language['vähähiilihydraattinen']?></option>
 					  </select>
 				</div>
 				<div class="form-group">
 					<label for="groupname">
-						Reseptiryhmä
+					<?php echo $language['reseptiryhmä']?>
 					</label>
 					</br>
 					<select name="kategoriat2">
-						<option value="Alkuruoka">Alkuruoka</option>
-						<option value="Paaruoka">Pääruoka</option>
-						<option value="Aamu-, vali- ja iltapala">Aamu-, väli- ja iltapala</option>
-						<option value="Jalkiruoka">Jälkiruoka</option>
-						<option value="Salaatti">Salaatti</option>
-						<option value="Keitto">Keitto</option>
-						<option value="Juoma">Juoma</option>
+                    <option value="Alkuruoka"><?php echo $language['alkuruoka']?></option>
+                    <option value="Pääruoka"><?php echo $language['pääruoka']?></option>
+                    <option value="Aamu-, väli- ja iltapala"><?php echo $language['välipala']?></option>
+                    <option value="Jälkiruoka"><?php echo $language['jälkiruoka']?></option>
+                    <option value="Salaatti"><?php echo $language['salaatti']?></option>
+                    <option value="Keitto"><?php echo $language['keitto']?></option>
+                    <option value="Juoma"><?php echo $language['juoma']?></option>
 					  </select>
 				</div>
 				<div class="form-group">
 						<label for="aines1">
-							Ainesosat
+						<?php echo $language['ainesosat']?>
 						</label>
 						</br>
 						<table id="container">
 							<tr>
-								<th>Ainesosan nimi</th>
-								<th>Määrä</th> 
-								<th>Mittayksikkö</th>
+								<th><?php echo $language['ainesosa']?></th>
+								<th><?php echo $language['määrä']?></th> 
+								<th><?php echo $language['mittayksikkö']?></th> 
 							</tr>
 							<tr>
 								<td><input type="text" id="ingredient" name="ingredient[]" /></td>
@@ -128,12 +129,12 @@ include("language.php");
 								<td><input type="text" id="measure" name="measure[]" /></td>
 							</tr>
 						</table>
-						<button type="button" onclick="addRow()">Lisää rivi</button>
+						<button type="button" onclick="addRow()"><?php echo $language['lisää']?></button>
 						
 				</div>
 				<div class="form-group">	 
 					<label for="instruction">
-						Valmistusohje
+					<?php echo $language['ohje']?>
 					</label>
 					</br>
 					<textarea rows="4" cols="75" name="valmistusohje">
@@ -141,15 +142,15 @@ include("language.php");
 				</div>
 				<div class="form-group">
 					<label for="kuvalataus">
-						Lataa kuva
+					<?php echo $language['lataa kuva']?>
 					</label>
 					<input type="file" class="form-control-file" id="kuva">
 					<p class="help-block">
-						Lataa kuva reseptin tuotoksesta.
+					<?php echo $language['lataa kuva']?>
 					</p>
 				</div> 
 				<button type="submit" class="btn btn-primary">
-					Tallenna
+				<?php echo $language['tallenna']?>
 				
 				</button>
 			</form>

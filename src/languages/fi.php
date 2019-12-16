@@ -32,5 +32,12 @@ $language = array(
     "reseptinimi" => "Reseptinimi",
     "käyttäjä" => "Käyttäjä",
     "annoksia" => "Annoksia",
-    "ohje" => "Ohje"
+    "ohje" => "Ohje",
+    "määrä" => "Määrä",
+    "mittayksikkö" => "Mittayksikkö",
+    "lisää" => "Lisää rivi",
+    "lataa kuva" => "Lataa Kuva",
+    "valitse tiedosto" => "Valitse Tiedosto",
+    "tallenna" => "Tallenna",
+    "ainesosat" => "Ainesosat"
 );
