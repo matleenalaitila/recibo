@@ -93,7 +93,9 @@ select {
   padding: 20px;
   padding-top: 30px;
   clear: both;
+  max-height: 300px;
   margin-bottom: -250px !IMPORTANT;
+  margin-left: 20% !IMPORTANT;
 }
 #reseptiohje {
   margin-bottom: 10px !IMPORTANT;

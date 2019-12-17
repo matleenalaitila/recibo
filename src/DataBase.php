@@ -91,7 +91,7 @@ $recipeID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_STRING);
 			$connection->beginTransaction();
 	
 			// tähän sql-komennot, jossa saadaan talteen tiedot
-			$statement = $connection->prepare("SELECT recipename, ID FROM recipe ORDER BY timestamp");
+			$statement = $connection->prepare("SELECT recipename, ID FROM recipe ORDER BY timestamp DESC LIMIT 0, 3");
         	$statement->execute();
 
 			// vaihdetaan hakumoodiksi objecti
