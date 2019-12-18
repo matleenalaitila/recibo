@@ -38,13 +38,13 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                   <ul class="navbar-nav">
                     <li class="nav-item">
-                      <a class="nav-link" href="index.php">Etusivu</a>
+                      <a class="nav-link" href="index.php"><?php echo $language['homepage']?></a>
                     </li>
                     <li class="nav-item active">
-                      <a class="nav-link" href="random.php">Arvo resepti<span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="random.php"><?php echo $language['random']?><span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="save.php">Lisää resepti</a>
+                      <a class="nav-link" href="save.php"><?php echo $language['add']?></a>
                     </li>
                   </ul>
                 </div>
